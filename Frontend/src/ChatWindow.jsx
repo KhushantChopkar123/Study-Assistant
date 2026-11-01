@@ -190,7 +190,7 @@ function ChatWindow() {
         <div className="chatWindow">
             <div className="navbar">
                 <span>
-                    SigmaGPT{" "}
+                    Study Assistant{" "}
                     <i className="fa-solid fa-chevron-down"></i>
                 </span>
 
