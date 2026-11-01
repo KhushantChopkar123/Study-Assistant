@@ -1,0 +1,260 @@
+/* .chats {
+    max-width: 700px;
+    overflow-y: scroll;
+    padding: 8rem;
+}
+
+.userDiv {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 0.9rem;
+}
+
+
+.gptDiv {
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.userMessage {
+    background-color: #323232;
+    padding: 10px 20px;
+    border-radius: 14px;
+    margin-left: 15rem;
+    max-width: 500px;
+    width: fit-content;
+}
+
+.hljs {
+    border-radius: 14px !important;
+}
+
+pre {
+    white-space: pre-wrap;
+} */
+
+
+
+
+
+/* Main chat container */
+.chats {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 24px 24px 40px;
+    box-sizing: border-box;
+    overflow-y: auto;
+
+    /* Dark scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #444 transparent;
+}
+
+/* Chrome, Edge, Safari scrollbar */
+.chats::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chats::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chats::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 10px;
+}
+
+.chats::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+.chats::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* User message row */
+.userDiv {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 20px 0;
+    box-sizing: border-box;
+}
+
+/* User message bubble */
+.userMessage {
+    background: #303030;
+    color: #f5f5f5;
+    padding: 12px 18px;
+    border-radius: 20px;
+    max-width: 75%;
+    width: fit-content;
+    margin: 0;
+
+    font-size: 0.95rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+    box-sizing: border-box;
+}
+
+/* AI response */
+.gptDiv {
+    color: #e5e5e5;
+    text-align: left;
+    font-size: 0.96rem;
+    line-height: 1.75;
+    margin: 20px 0 28px;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    box-sizing: border-box;
+}
+
+/* Remove extra paragraph spacing */
+.gptDiv p {
+    margin: 0 0 14px;
+}
+
+.gptDiv p:last-child {
+    margin-bottom: 0;
+}
+
+/* AI headings */
+.gptDiv h1,
+.gptDiv h2,
+.gptDiv h3 {
+    color: #fff;
+    line-height: 1.4;
+    margin: 20px 0 10px;
+}
+
+/* AI lists */
+.gptDiv ul,
+.gptDiv ol {
+    padding-left: 24px;
+    margin: 10px 0;
+}
+
+.gptDiv li {
+    margin-bottom: 6px;
+}
+
+/* Inline code */
+.gptDiv :not(pre) > code {
+    background: #2d2d2d;
+    color: #e6e6e6;
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+/* Code blocks */
+.gptDiv pre {
+    background: #161616;
+    border: 1px solid #383838;
+    border-radius: 12px;
+    padding: 16px;
+    overflow-x: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.gptDiv pre code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* Code highlight */
+.hljs {
+    border-radius: 12px !important;
+}
+
+/* Images inside AI answers */
+.gptDiv img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Tables inside AI answers */
+.gptDiv table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+}
+
+.gptDiv th,
+.gptDiv td {
+    padding: 8px 12px;
+    border: 1px solid #444;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .chats {
+        padding: 16px 12px 28px;
+    }
+
+    .userMessage {
+        max-width: 88%;
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+
+    .gptDiv {
+        font-size: 0.92rem;
+    }
+
+    .gptDiv pre {
+        padding: 12px;
+    }
+}
+
+/* Attachments displayed inside chat messages */
+.chatAttachments {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.chatAttachment {
+    max-width: 280px;
+}
+
+.chatAttachmentImage {
+    display: block;
+    width: 100%;
+    max-width: 260px;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.chatAttachmentFile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #555;
+    border-radius: 12px;
+    overflow-wrap: anywhere;
+}
+
+.chatAttachmentFile i {
+    font-size: 26px;
+    color: #ef4444;
+}
+
+.chatAttachmentFile p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.chatAttachmentFile small {
+    color: #aaa;
+}
