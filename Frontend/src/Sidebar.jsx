@@ -1,6 +1,8 @@
 
 
 import "./Sidebar.css";
+import logo from "./assets/icon.png";
+
 import { useContext, useEffect, useState } from "react";
 import { MyContext } from "./MyContext.jsx";
 import { v1 as uuidv1 } from "uuid";
@@ -62,12 +64,12 @@ function Sidebar() {
     const getAllThreads = async () => {
         try {
             const response = await fetch(
-              "https://study-assistant-111.onrender.com/api/thread",
+                "https://study-assistant-111.onrender.com/api/thread",
                 {
                     credentials: "include"
                 }
             );
- 
+
             if (!response.ok) {
                 throw new Error("Failed to fetch chat history");
             }
@@ -104,7 +106,7 @@ function Sidebar() {
 
         try {
             const response = await fetch(
-                 `https://study-assistant-111.onrender.com/api/thread/${encodeURIComponent(newThreadId)}`,
+                `https://study-assistant-111.onrender.com/api/thread/${encodeURIComponent(newThreadId)}`,
                 {
                     credentials: "include"
                 }
@@ -129,7 +131,7 @@ function Sidebar() {
     const deleteThread = async (threadId) => {
         try {
             const response = await fetch(
-                 `https://study-assistant-111.onrender.com/api/thread/${encodeURIComponent(threadId)}`,
+                `https://study-assistant-111.onrender.com/api/thread/${encodeURIComponent(threadId)}`,
                 {
                     method: "DELETE",
                     credentials: "include"
@@ -175,8 +177,8 @@ function Sidebar() {
                 type="button"
             >
                 <img
-                    src="src/assets/blacklogo.png"
-                    alt="SigmaGPT logo"
+                    src={logo}
+                    alt="Study AI logo"
                     className="logo"
                 />
 
@@ -211,7 +213,10 @@ function Sidebar() {
                                 deleteThread(thread.threadId);
                             }}
                             onKeyDown={(e) => {
-                                if (e.key === "Enter" || e.key === " ") {
+                                if (
+                                    e.key === "Enter" ||
+                                    e.key === " "
+                                ) {
                                     e.preventDefault();
                                     e.stopPropagation();
                                     deleteThread(thread.threadId);
@@ -229,7 +234,10 @@ function Sidebar() {
                 </div>
 
                 <div className="profile-info">
-                    <span className="profile-name" title={userName}>
+                    <span
+                        className="profile-name"
+                        title={userName}
+                    >
                         {userName}
                     </span>
 
@@ -250,4 +258,5 @@ function Sidebar() {
 }
 
 export default Sidebar;
+
 

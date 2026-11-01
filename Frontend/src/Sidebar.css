@@ -184,3 +184,12 @@ button:hover {
         font-size: 12px;
     }
 }
+
+/* Sidebar logo */
+.logo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
+}
