@@ -12,26 +12,32 @@ import chatRoutes from "./routes/chat.js";
 import authRoutes from "./routes/auth.js";
 
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 // 1. Security headers
 app.use(helmet());
 
-// 2. Limit incoming JSON request body size
+// 2. Trust Render proxy in production
+if (process.env.NODE_ENV === "production") {
+    app.set("trust proxy", 1);
+}
+
+// 3. Limit incoming JSON request body size
 app.use(express.json({
     limit: "32kb"
 }));
 
-// 3. CORS
+// 4. CORS
 app.use(cors({
     origin: [
         "http://localhost:5173",
         "http://localhost:5174",
+        "https://study-assistant-1-q42o.onrender.com",
     ],
     credentials: true,
 }));
 
-// 4. Session configuration
+// 5. Session configuration
 app.use(session({
     name: "sigma.sid",
     secret: process.env.SESSION_SECRET,
@@ -46,22 +52,22 @@ app.use(session({
 
     cookie: {
         httpOnly: true,
-        secure: false, // Local HTTP development only
-        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         path: "/",
         maxAge: 24 * 60 * 60 * 1000,
     },
 }));
 
-// 5. Passport configuration
+// 6. Passport configuration
 app.use(passport.initialize());
 app.use(passport.session());
 
-// 6. Routes
+// 7. Routes
 app.use("/auth", authRoutes);
 app.use("/api", chatRoutes);
 
-// 7. Error handling
+// 8. Error handling
 app.use((err, req, res, next) => {
     if (err.type === "entity.too.large") {
         return res.status(413).json({
@@ -82,7 +88,7 @@ app.use((err, req, res, next) => {
     next(err);
 });
 
-// 8. Connect Database
+// 9. Connect Database
 const connectDB = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URI);

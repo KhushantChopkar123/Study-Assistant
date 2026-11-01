@@ -33,6 +33,7 @@ function requireAuth(req, res, next) {
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
+   "https://study-assistant-1-q42o.onrender.com",
 ];
 
 router.use((req, res, next) => {

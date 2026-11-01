@@ -31,7 +31,7 @@ function App() {
   const checkAuth = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8080/auth/me",
+        `https://study-assistant-111.onrender.com/auth/me`,
         {
           credentials: "include",
         }
@@ -71,7 +71,7 @@ function App() {
   const handleLogout = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8080/auth/logout",
+       `https://study-assistant-111.onrender.com/auth/logout`,
         {
           method: "POST",
           credentials: "include",
@@ -94,12 +94,12 @@ function App() {
   // Login success: verify session with backend
   const handleLogin = async () => {
     const response = await fetch(
-      "http://localhost:8080/auth/me",
+      `https://study-assistant-111.onrender.com/auth/me`,
       {
         credentials: "include",
       }
     );
-
+ 
     if (!response.ok) {
       throw new Error(
         "Login succeeded, but session verification failed."

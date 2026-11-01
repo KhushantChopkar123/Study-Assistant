@@ -108,7 +108,7 @@ function ChatWindow() {
             });
 
             const response = await fetch(
-                "http://localhost:8080/api/chat",
+              "https://study-assistant-111.onrender.com/api/chat",
                 {
                     method: "POST",
                     credentials: "include",

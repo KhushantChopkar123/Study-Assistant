@@ -26,7 +26,7 @@ function Sidebar() {
         const getCurrentUser = async () => {
             try {
                 const response = await fetch(
-                    "http://localhost:8080/auth/me",
+                    "https://study-assistant-111.onrender.com/auth/me",
                     {
                         credentials: "include"
                     }
@@ -62,12 +62,12 @@ function Sidebar() {
     const getAllThreads = async () => {
         try {
             const response = await fetch(
-                "http://localhost:8080/api/thread",
+              "https://study-assistant-111.onrender.com/api/thread",
                 {
                     credentials: "include"
                 }
             );
-
+ 
             if (!response.ok) {
                 throw new Error("Failed to fetch chat history");
             }
@@ -104,7 +104,7 @@ function Sidebar() {
 
         try {
             const response = await fetch(
-                `http://localhost:8080/api/thread/${encodeURIComponent(newThreadId)}`,
+                 `https://study-assistant-111.onrender.com/api/thread/${encodeURIComponent(newThreadId)}`,
                 {
                     credentials: "include"
                 }
@@ -129,7 +129,7 @@ function Sidebar() {
     const deleteThread = async (threadId) => {
         try {
             const response = await fetch(
-                `http://localhost:8080/api/thread/${encodeURIComponent(threadId)}`,
+                 `https://study-assistant-111.onrender.com/api/thread/${encodeURIComponent(threadId)}`,
                 {
                     method: "DELETE",
                     credentials: "include"

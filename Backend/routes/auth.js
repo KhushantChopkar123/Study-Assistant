@@ -13,6 +13,7 @@ const router = express.Router();
 const allowedOrigins = new Set([
     "http://localhost:5173",
     "http://localhost:5174",
+     "https://study-assistant-1-q42o.onrender.com",
 ]);
 
 // Origin validation for state-changing requests

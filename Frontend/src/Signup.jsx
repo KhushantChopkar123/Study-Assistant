@@ -16,7 +16,7 @@ function Signup({ onSignup, onSwitchToLogin, onBackHome }) {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/auth/signup",
+        "https://study-assistant-111.onrender.com/auth/signup",
         {
           method: "POST",
           headers: {
