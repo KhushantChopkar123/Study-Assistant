@@ -108,7 +108,7 @@ function ChatWindow() {
             });
 
             const response = await fetch(
-              "https://study-assistant-111.onrender.com/api/chat",
+                "https://study-assistant-111.onrender.com/api/chat",
                 {
                     method: "POST",
                     credentials: "include",
@@ -189,7 +189,8 @@ function ChatWindow() {
     return (
         <div className="chatWindow">
             <div className="navbar">
-                <span>
+                {/* Hidden on phone screens using CSS */}
+                <span className="navbar-title">
                     Study Assistant{" "}
                     <i className="fa-solid fa-chevron-down"></i>
                 </span>
@@ -340,7 +341,7 @@ function ChatWindow() {
                 </div>
 
                 <p className="info">
-                    SigmaGPT can make mistakes. Check important info.
+                    Study Assistant can make mistakes. Check important info.
                     See Cookie Preferences.
                 </p>
             </div>
@@ -349,4 +350,3 @@ function ChatWindow() {
 }
 
 export default ChatWindow;
-

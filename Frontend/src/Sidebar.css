@@ -1,3 +1,4 @@
+
 .sidebar {
     background-color: #171717;
     color: #b4b4b4;
@@ -7,7 +8,6 @@
     flex-direction: column;
     justify-content: space-between;
 }
-
 
 button {
     display: flex;
@@ -22,11 +22,13 @@ button {
 }
 
 .logo {
-    height: 25px;
-    width: 25px;
+    height: 36px;
+    width: 36px;
     background-color: #fff;
     border-radius: 50%;
-    object-fit: cover;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
 }
 
 button span {
@@ -86,10 +88,7 @@ button:hover {
     border-radius: 10px;
 }
 
-
-
-
-/* ===== SigmaGPT Logged-in Profile ===== */
+/* ===== Logged-in Profile ===== */
 
 .sidebar-profile {
     display: flex;
@@ -167,7 +166,7 @@ button:hover {
     margin-left: auto;
 }
 
-/* Smaller screens */
+/* Existing smaller profile styling */
 @media (max-width: 480px) {
     .sidebar-profile {
         padding: 14px 10px;
@@ -185,11 +184,99 @@ button:hover {
     }
 }
 
-/* Sidebar logo */
-.logo {
-    width: 36px;
-    height: 36px;
-    object-fit: contain;
-    display: block;
-    flex-shrink: 0;
+/* =================================
+   RESPONSIVE SIDEBAR
+   Desktop design stays unchanged
+================================= */
+
+/* Hidden on desktop */
+.mobile-menu-btn {
+    display: none;
+}
+
+.sidebar-overlay {
+    display: none;
+}
+
+@media screen and (max-width: 700px) {
+
+    /* Mobile sidebar */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        width: 260px;
+        max-width: 85vw;
+        height: 100vh;
+        height: 100dvh;
+
+        box-sizing: border-box;
+        z-index: 1001;
+
+        transform: translateX(-100%);
+        visibility: hidden;
+        pointer-events: none;
+
+        transition:
+            transform 0.25s ease,
+            visibility 0.25s ease;
+    }
+
+    /* Sidebar open */
+    .sidebar.open {
+        transform: translateX(0);
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    /* Hamburger button */
+    .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        position: fixed;
+        top: 12px;
+        left: 12px;
+
+        width: 42px;
+        height: 42px;
+
+        margin: 0;
+        padding: 0;
+
+        border: none;
+        border-radius: 8px;
+
+        background: transparent;
+        color: #f8fafc;
+
+        font-size: 21px;
+        cursor: pointer;
+
+        z-index: 1003;
+    }
+
+    .mobile-menu-btn:hover {
+        background: rgba(180, 180, 180, 0.10);
+    }
+
+    /* Dark overlay */
+    .sidebar-overlay {
+        display: block;
+
+        position: fixed;
+        inset: 0;
+
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 1000;
+    }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .sidebar {
+        transition: none;
+    }
 }

@@ -328,3 +328,27 @@
         flex-basis: 32px;
     }
 }
+
+/* Hide navbar title on phone screens */
+@media screen and (max-width: 700px) {
+    .navbar-title {
+        display: none;
+    }
+}
+
+/* Keep profile icon at top-right on mobile */
+@media screen and (max-width: 700px) {
+    .navbar {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .navbar .userIconDiv {
+        position: fixed;
+        top: 12px;
+        right: 16px;
+        left: auto;
+        margin: 0;
+        z-index: 999;
+    }
+}

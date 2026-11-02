@@ -1,5 +1,4 @@
 
-
 import "./Sidebar.css";
 import logo from "./assets/icon.png";
 
@@ -20,6 +19,7 @@ function Sidebar() {
     } = useContext(MyContext);
 
     const [currentUser, setCurrentUser] = useState(null);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     // Fetch logged-in user's profile
     useEffect(() => {
@@ -98,10 +98,14 @@ function Sidebar() {
         setReply(null);
         setCurrThreadId(uuidv1());
         setPrevChats([]);
+
+        // Close sidebar on small screens
+        setSidebarOpen(false);
     };
 
     // Open existing chat
     const changeThread = async (newThreadId) => {
+        setSidebarOpen(false);
         setCurrThreadId(newThreadId);
 
         try {
@@ -168,95 +172,127 @@ function Sidebar() {
             : userName.charAt(0).toUpperCase();
 
     return (
-        <section className="sidebar">
-
-            {/* New Chat */}
+        <>
+            {/* Mobile hamburger menu */}
             <button
-                className="sidebar-new-chat"
-                onClick={createNewChat}
                 type="button"
+                className="mobile-menu-btn"
+                aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
+                aria-expanded={sidebarOpen}
+                aria-controls="study-sidebar"
+                onClick={() => setSidebarOpen((prev) => !prev)}
             >
-                <img
-                    src={logo}
-                    alt="Study AI logo"
-                    className="logo"
-                />
-
-                <span>
-                    <i className="fa-solid fa-pen-to-square"></i>
-                </span>
+                <i
+                    className={
+                        sidebarOpen
+                            ? "fa-solid fa-xmark"
+                            : "fa-solid fa-bars"
+                    }
+                ></i>
             </button>
 
-            {/* Chat History */}
-            <ul className="history">
-                {allThreads?.map((thread) => (
-                    <li
-                        key={thread.threadId}
-                        onClick={() => changeThread(thread.threadId)}
-                        className={
-                            thread.threadId === currThreadId
-                                ? "highlighted"
-                                : ""
-                        }
-                    >
-                        <span className="thread-title">
-                            {thread.title}
-                        </span>
+            {/* Mobile overlay */}
+            {sidebarOpen && (
+                <div
+                    className="sidebar-overlay"
+                    onClick={() => setSidebarOpen(false)}
+                    aria-hidden="true"
+                ></div>
+            )}
 
-                        <i
-                            className="fa-solid fa-trash"
-                            role="button"
-                            tabIndex={0}
-                            aria-label={`Delete ${thread.title}`}
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                deleteThread(thread.threadId);
-                            }}
-                            onKeyDown={(e) => {
-                                if (
-                                    e.key === "Enter" ||
-                                    e.key === " "
-                                ) {
-                                    e.preventDefault();
+            {/* Sidebar */}
+            <section
+                id="study-sidebar"
+                className={`sidebar ${sidebarOpen ? "open" : ""}`}
+            >
+                {/* New Chat */}
+                <button
+                    className="sidebar-new-chat"
+                    onClick={createNewChat}
+                    type="button"
+                >
+                    <img
+                        src={logo}
+                        alt="Study AI logo"
+                        className="logo"
+                    />
+
+                    <span>
+                        <i className="fa-solid fa-pen-to-square"></i>
+                    </span>
+                </button>
+
+                {/* Chat History */}
+                <ul className="history">
+                    {allThreads?.map((thread) => (
+                        <li
+                            key={thread.threadId}
+                            onClick={() => changeThread(thread.threadId)}
+                            className={
+                                thread.threadId === currThreadId
+                                    ? "highlighted"
+                                    : ""
+                            }
+                        >
+                            <span className="thread-title">
+                                {thread.title}
+                            </span>
+
+                            <i
+                                className="fa-solid fa-trash"
+                                role="button"
+                                tabIndex={0}
+                                aria-label={`Delete ${thread.title}`}
+                                onClick={(e) => {
                                     e.stopPropagation();
                                     deleteThread(thread.threadId);
-                                }
-                            }}
-                        ></i>
-                    </li>
-                ))}
-            </ul>
+                                }}
+                                onKeyDown={(e) => {
+                                    if (
+                                        e.key === "Enter" ||
+                                        e.key === " "
+                                    ) {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        deleteThread(thread.threadId);
+                                    }
+                                }}
+                            ></i>
+                        </li>
+                    ))}
+                </ul>
 
-            {/* Logged-in User Profile */}
-            <div className="sidebar-profile">
-                <div className="profile-avatar">
-                    {userInitial}
+                {/* Logged-in User Profile */}
+                <div className="sidebar-profile">
+                    <div className="profile-avatar">
+                        {userInitial}
+                    </div>
+
+                    <div className="profile-info">
+                        <span
+                            className="profile-name"
+                            title={userName}
+                        >
+                            {userName}
+                        </span>
+
+                        <span className="profile-label">
+                            Personal account
+                        </span>
+                    </div>
+
+                    <i
+                        className="fa-solid fa-circle-check profile-status"
+                        title="Signed in"
+                        aria-label="Signed in"
+                    ></i>
                 </div>
-
-                <div className="profile-info">
-                    <span
-                        className="profile-name"
-                        title={userName}
-                    >
-                        {userName}
-                    </span>
-
-                    <span className="profile-label">
-                        Personal account
-                    </span>
-                </div>
-
-                <i
-                    className="fa-solid fa-circle-check profile-status"
-                    title="Signed in"
-                    aria-label="Signed in"
-                ></i>
-            </div>
-
-        </section>
+            </section>
+        </>
     );
 }
 
 export default Sidebar;
+
 
 
